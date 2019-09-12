@@ -42,8 +42,6 @@ void inorder(Node *root){
 int isSumProperty(Node *node);
 int main()
 {
-	//freopen("input.txt","r",stdin);
-	//freopen("output.txt","w",stdout);
 	int t;
 	cin>>t;
 	while(t-->0)
@@ -56,7 +54,7 @@ int main()
 			int a1,a2;
 			cin>>a1>>a2;
 			char lr;
-			scanf(" %c",&lr);
+			cin>>lr;
 			if(root1==NULL){
 				root1=new Node(a1);
 				switch(lr){
@@ -73,22 +71,6 @@ int main()
 			cout<<isSumProperty(root1)<<endl;
 	}
 }
-
-}
-/*This is a function problem.You only need to complete the function given below*/
-/*Complete the function below
-struct Node
-{
-    int data;
-    struct Node* left;
-    struct Node* right;
-    
-    Node(int x){
-        data = x;
-        left = right = NULL;
-    }
-};
-*/
 int sum(Node *node)
 {
     if(node==NULL)
