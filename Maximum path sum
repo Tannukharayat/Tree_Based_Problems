@@ -1,0 +1,27 @@
+/******* Given a binary tree in which each node element contains a number. Find the maximum possible sum from one leaf node to another****/
+
+int sum(struct Node *root)
+{
+    if(root==NULL)
+    return 0;
+    return root->data+max(sum(root->left),sum(root->right));
+}
+void  funct(struct Node *root , int &ans )
+{
+    
+    if(root!=NULL)
+   {
+       int s=sum(root->left)+sum(root->right)+root->data;
+       if(s>ans)
+       ans=s;
+       funct (root->left , ans );
+       funct (root->right , ans );
+   }
+   
+}
+int maxPathSum(struct Node *root)
+{
+     int ans=-INT_MAX;
+     funct ( root , ans ) ; 
+     return ans ; 
+}
