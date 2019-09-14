@@ -1,0 +1,41 @@
+/******* Given a Binary Tree, find diameter of it.
+The diameter of a tree is the number of nodes on the longest path between two leaves in the tree. ******/
+
+int height(Node* np)
+{
+   
+    if(np==NULL)
+    return 0;
+    int hl,hr;
+    hl=height(np->left);
+    hr=height(np->right);
+    if(hl>hr)
+    return hl+1;
+    else return hr+1;
+    
+}
+int diameter(Node* node)
+{
+    vector<int> v;
+   queue<Node*> q;
+   q.push(node);
+  
+   int h=0;
+   while(!q.empty())
+   {
+       
+           Node *np= q.front(); 
+          q.pop();
+            if(np->left!=NULL)
+             q.push(np->left);
+            
+            if(np->right!=NULL)
+            q.push(np->right);
+            int llh,llr;
+            llh=height(np->left);
+            llr=height(np->right);
+            h=max(h,llh+llr+1);
+           
+   }
+   return h;
+}
