@@ -1,0 +1,31 @@
+/***** Given a binary tree containing N+1 with N edges nodes and an integer X. Your task is to complete the function
+countSubtreesWithSumX() that returns the count of the number of subtress having total node’s data sum equal to a value X. *********/
+
+int countsum(Node* root)
+{
+    if(root==NULL)
+	return 0;
+	return root->data+countsum(root->left)+countsum(root->right);
+}
+void count(Node* root, int x,int &cnt1)
+{
+  if(root!=NULL)
+   {
+      int l=countsum(root->left);
+      int r=countsum(root->right);
+      if(l+r+root->data==x)
+      {
+          cnt1++;
+      }
+      
+       count(root->left,x,cnt1);
+       count(root->right,x,cnt1);
+   }
+  
+}
+int countSubtreesWithSumX(Node* root, int x)
+{
+    int cnt1=0;
+   count(root,x,cnt1);
+   return cnt1;
+}
