@@ -1,0 +1,52 @@
+/** Given an array of positive integers. The task is to print the maximum length of Bitonic subsequence. 
+a subsequenceof array is called Bitonic if it is first increasing, then decreasing **/
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n;
+int main()
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    long long int a[n],I_front[n],I_back[n];
+	    for(int j=0;j<n;j++)
+	    cin>>a[j];
+	    for(int j=0;j<n;j++)
+	    I_front[j]=1;
+	    for(int j=0;j<n;j++)
+	    {
+	         I_front[j]=1;
+	         I_back[j]=1;
+	    }
+	    for(int j=1;j<n;j++)
+	    {
+	        for(int k=0;k<j;k++)
+	        {
+	            if(a[k]<a[j])
+	            {
+	                I_front[j]=max(I_front[j],I_front[k]+1);
+	            }
+	        }
+	    }
+	     for(int j=n-2;j>=0;j--)
+	    {
+	        for(int k=n-1;k>j;k--)
+	        {
+	            if(a[k]<a[j])
+	            {
+	                I_back[j]=max(I_back[j],I_back[k]+1);
+	            }
+	        }
+	    }
+	
+	    long long int ans=0;
+	    for(int j=0;j<n;j++)
+	    {
+	        ans=max(ans,I_back[j]+I_front[j]-1);
+	    }
+	    cout<<ans<<endl;
+	}
+	return 0;
+}
