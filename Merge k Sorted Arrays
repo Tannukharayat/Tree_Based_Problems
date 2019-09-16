@@ -1,0 +1,26 @@
+/* Given K sorted arrays arranged in form of a matrix. The task is to merge them. You need to complete mergeKArrays() function which takes
+2 arguments, an arr[k][k] 2D Matrix containing k sorted arrays and an integer k denoting the number of sorted arrays. The function should
+return a pointer to the merged sorted arrays */
+
+int *mergeKArrays(int arr[][N], int k)
+{
+    typedef pair<int,pair<int,int> > p; 
+    priority_queue<p,vector<p>,greater<p> >pq;
+    int *new_ar=new int[k*k];
+    int l=0;
+    for(int i=0;i<k;i++)
+    {
+        pq.push({arr[i][0],{i,0}});
+    }
+    while(!pq.empty())
+    {
+        p front=pq.top();
+        pq.pop();
+        int x=front.second.first;
+        int y=front.second.second;
+        new_ar[l++]=front.first;
+          if(y+1<k)
+        pq.push({arr[x][y+1],{x,y+1}});
+    }
+    return new_ar;
+}
