@@ -1,3 +1,5 @@
+/** Given two BST, you need to print the elements of both BSTs in sorted form.**/
+
 #include<bits/stdc++.h>
 using namespace std;
 struct Node 
