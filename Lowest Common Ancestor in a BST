@@ -1,4 +1,4 @@
-/***** Given a Binary Search Tree and 2 nodes value n1 and n2, your task is to find the lowest common ancestor(LCA) of the two nodes ****/
+/***** Given a Binary Tree and 2 nodes value n1 and n2, your task is to find the lowest common ancestor(LCA) of the two nodes ****/
 
 
 #include<bits/stdc++.h>
