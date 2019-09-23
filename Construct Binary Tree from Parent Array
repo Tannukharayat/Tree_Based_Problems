@@ -1,0 +1,101 @@
+/* Given an array of size N that represents a Tree in such a way that array indexes are values in tree nodes and array values give the 
+parent node of that particular index (or node). The value of the root node index would always be -1 as there is no parent for root. 
+Construct the standard linked representation of Binary Tree from this array representation */
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> result;
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+void printGivenLevel(Node* root, int level)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        result.push_back(root->data);
+    else if (level > 1)
+    {
+        printGivenLevel(root->left, level-1);
+        printGivenLevel(root->right, level-1);
+    }
+}
+int height(struct Node* node)
+{
+    if (node==NULL)
+        return 0;
+    else
+    {
+        int lheight = height(node->left);
+        int rheight = height(node->right);
+        if (lheight > rheight)
+            return(lheight+1);
+        else return(rheight+1);
+    }
+}
+void printLevelOrder(struct Node* root)
+{
+    int h = height(root);
+    int i;
+    for (i=1; i<=h; i++){
+        result.clear();
+        printGivenLevel(root, i);
+        sort(result.begin(),result.end());
+        for(int i=0;i<result.size();i++)
+            cout<<result[i]<<" ";
+    }
+}
+Node *createTree(int parent[], int n);
+int main()
+{
+  int T,i,n,l,k;
+    cin>>T;
+    while(T--){
+    int N;
+    cin>>N;
+    int a[N];
+    for(int i=0;i<N;i++)
+        cin>>a[i];
+        struct Node *res = createTree(a,N);
+       printLevelOrder(res);
+     cout<<endl;
+    }
+    return 0;
+}
+
+Node *createTree(int parent[], int n)
+{
+    Node *head;
+    Node *np[n];
+    for(int i=0;i<n;i++)
+    {
+         np[i]=new Node(i);
+         np[i]->left=NULL;
+         np[i]->right=NULL;
+    }
+    for(int i=0;i<n;i++)
+    {
+         if(parent[i]==-1)
+        {
+            head=np[i];
+        }else
+        {
+            if(np[parent[i]]->left==NULL)
+            {
+                np[parent[i]]->left=np[i];
+            }else if(np[parent[i]]->right==NULL)
+            {
+                np[parent[i]]->right=np[i];
+            }
+        }
+    }
+    return head;
+}
