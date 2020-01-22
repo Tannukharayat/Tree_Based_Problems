@@ -1,0 +1,63 @@
+**Given a snake and ladder board of order 5x6, find the minimum number of dice throws required to reach the destination or last cell (30th
+cell) from source (1st cell) **
+
+      int funct( int h[100])
+      {
+          queue<pair<int,int> > q;
+          int vis[100]={0};
+          pair<int,int> p;
+          q.push({1,0});
+          vis[1]=1;
+          while(!q.empty())
+          {
+              queue<pair<int,int> > q1;
+              while(!q.empty())
+              {
+                  p = q.front();
+                  q.pop();
+                  if(p.first==30)
+                  {
+                      break;
+                  }
+                  for(int i = p.first+1 ; i <= p.first+6 ; i++)
+                  {
+                      if(vis[i]==1)
+                      continue;
+                      vis[i]=1;
+                      if(h[i]==0)
+                      {
+                           q1.push({i,p.second+1});
+                          //cout<<p.first<<" "<<i<<" "<<p.second+1<<endl;
+                      }
+                      else
+                      {
+                          q1.push({h[i],p.second+1});
+                      //     cout<<p.first<<" "<<h[i]<<" "<<p.second+1<<endl;
+                      }
+                  }
+              }q=q1;
+              if(p.first==30)
+                  {
+                      break;
+                  }
+          }cout<<p.second<<endl;
+      }
+      int main() 
+      {
+        int t;
+        cin >> t ;
+        while(t--)
+        {
+            int n , a , b ;
+            int h[100];
+            memset(h,0,sizeof(h));
+            cin >> n ;
+            for(int i = 0 ; i < n ; i++)
+            {
+                cin >> a >> b ;
+                h[a]=b;
+            }
+            funct(h);
+        }
+        return 0;
+    }
